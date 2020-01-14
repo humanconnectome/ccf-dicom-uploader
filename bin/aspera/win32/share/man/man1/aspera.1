@@ -1,0 +1,973 @@
+.TH aspera 1 11\-October\-2016 aspera(1) Aspera
+
+.SH NAME
+aspera command-line client \- Perform Aspera commands from the command line.
+
+.SH SYNOPSIS
+.B aspera
+[\fBcommand\fR]
+[\fBsubcommand\fR]
+[\fBargs\fR ...]
+
+.SH DESCRIPTION
+
+.B aspera command line client
+The "aspera" command is a client application which allows you 
+to interact with an Aspera Shares, Faspex or Files server from the command line.
+
+.SH FASPEX COMMANDS
+.Pp
+.TP
+.BR faspex
+browse
+
+View the contents of a source directory.
+.Pp
+.Pp
+.TP
+.BR faspex
+dropbox
+
+Show information about dropboxes.
+.Pp
+.TP
+.BR faspex
+get
+
+Get (download) package for URL.
+.Pp
+.Pp
+.TP
+.BR faspex
+help
+
+View help for a faspex command.
+.Pp
+.Pp
+.TP
+.BR faspex
+list
+
+List the contents of a user's inbox, sent or archived messages.
+.Pp
+.Pp
+.TP
+.BR faspex
+send
+
+Send a package.
+.Pp
+
+.SH SHARES COMMANDS
+.Pp
+.TP
+.BR shares
+upload
+
+Upload files to a Shares server
+.Pp
+.Pp
+.TP
+.BR shares
+download
+
+Download files or directories from a Shares server
+.Pp
+.TP
+.BR shares
+browse
+
+Browse a directory of a Shares Server
+.Pp
+.Pp
+.TP
+.BR shares
+help
+
+View help for a specific shares command
+.Pp
+.Pp
+.TP
+.BR shares
+delete
+
+Delete a file or directory
+.Pp
+.Pp
+.TP
+.BR shares
+rename
+
+Rename a file or directory
+.Pp
+
+.SH FASPEX BROWSE COMMAND
+
+.B Usage:
+.RS
+  \fBaspera faspex\fR browse [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B\-c<num>, \-\-count=<num>
+Only get up to <num> items
+.Pp
+.Pp
+.TP
+.B \-j, \-\-json
+Output raw JSON
+.Pp
+.Pp
+.TP
+.B \-p<path>, \-\-path=<path>
+Path for viewing
+.Pp
+.Pp
+.TP
+.B \-k<num>, \-\-skip=<num>
+Skip the first <num> items
+.Pp
+.Pp
+.TP
+.B \-o<order>, \-\-sort=<order>
+Sort by <order> *
+.Pp
+.Pp
+.TP
+.B \-s<id/name>, \-\-source=<id/name>
+Source server ID or name (matching ID takes precedence), as given in the .aspera_cli_conf configuration file, found in "bin" under the Aspera install directory. 
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.RE
+.B Sorting Options:
+.RS
+.Pp
+.TP
+.B type
+"file" or "directory"
+.Pp
+.Pp
+.TP
+.B size_a
+file size (ascending)
+.Pp
+.Pp
+.TP
+.B size_d
+file size (descending)
+.Pp
+.Pp
+.TP
+.B mtime_a
+file modification time (ascending)
+.Pp
+.Pp
+.TP
+.B mtime_d
+file modification time (descending)
+.Pp
+.RE
+
+.SH FASPEX DROPBOX COMMAND
+
+.B Usage:
+.RS
+  \fBaspera faspex\fR dropbox [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-j, \-\-json
+Output raw JSON
+.Pp
+.Pp
+.TP
+.B \-l<dropbox\-id>, \-\-list=<dropbox\-id>
+Show info for just this dropbox
+.Pp
+.Pp
+.TP
+.B \-a, \-\-list\-all
+Show info for all dropboxes
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Faspex user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Faspex username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.RE
+
+.SH FASPEX GET COMMAND
+
+.B Usage:
+.RS
+  \fBaspera faspex\fR get [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-f<path>, \-\-file=<path>
+File(s) to be sent in package (may be specified multiple times for multiple files)
+.Pp
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Faspex user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-\-url=<url>
+faspe:// formatted URL for Faspex package download
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Faspex username
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Faspex host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Faspex listening port 
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-\-target-rate=<rate>
+Attempt to revise the target rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-min-rate=<rate>
+Attempt to revise the minimum rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-rate-policy=<fair|low|high|fixed>
+Attempt to revise the rate policy (if server settings allow) to "fixed", "high", "fair" or "low".
+.Pp
+.Pp
+.TP
+.B \-\-cipher=<aes128|aes192|aes256|none>
+Attempt to set the encryption cypher to "aes-128", "aes-192", "aes-256" or "none" (if server settings allow).
+.Pp
+.RE
+
+.SH FASPEX LIST COMMAND
+
+.B Usage:
+.RS
+  \fBaspera faspex\fR list [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-a, \-\-archived
+List archived packages
+.Pp
+.Pp
+.TP
+.B \-n, \-\-inbox
+List packages in inbox
+.Pp
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Faspex user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-s, \-\-sent
+List sent packages
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Faspex username
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Faspex host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Faspex listening port 
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-x, \-\-xml
+Get raw XML RSS atom for inbox, sent, or archived messages (Note that the faspe://... URLs in this format contain XML escape sequences, like &amp; for example, and cannot be used-as-is and pasted as input to a "get" command, unless first removed "manually" or by an XML parser.)
+
+.Pp
+.RE
+
+.SH FASPEX SEND COMMAND
+
+.B Usage:
+.RS
+  \fBaspera faspex\fR send [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.Pp
+.TP
+.B \-f<path>, \-\-file=<path>
+File(s) to be sent in package
+.Pp
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-m<meta>, \-\-metadata=<meta>
+Send metadata (JSON object text) with package
+.Pp
+.Pp
+.TP
+.B \-n<body>, \-\-note=<body>
+A note (body) for the Faspex package
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Faspex user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-r<email|user|dropbox|workgroup>, \-\-recipient=<email|user|dropbox|workgroup>
+Recipient(s) of the package (may be specified multiple times for multiple recipients). A valid e-mail address, Faspex user account name, Faspex workgroup, or Faspex dropbox name can be specified as the recipient.
+.Pp
+.Pp
+.TP
+.B \-s<id>, \-\-source\-id=<id>
+Send file from faspex\-defined source id
+.Pp
+.Pp
+.TP
+.B \-t<subj>, \-\-title=<subj>
+A title (subject) for the Faspex package
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Faspex username
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Faspex host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Faspex listening port 
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-\-target-rate=<rate>
+Attempt to revise the target rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-min-rate=<rate>
+Attempt to revise the minimum rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-rate-policy=<fair|low|high|fixed>
+Attempt to revise the rate policy (if server settings allow) to "fixed", "high", "fair" or "low".
+.Pp
+.Pp
+.TP
+.B \-\-cipher=<aes128|aes192|aes256|none>
+Attempt to set the encryption cypher to "aes-128", "aes-192", "aes-256" or "none" (if server settings allow).
+.Pp
+.RE
+
+.SH SHARES UPLOAD COMMAND
+
+.B Usage:
+.RS
+  \fBaspera shares\fR upload [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Shares host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Shares listening port 
+.Pp
+.Pp
+.TP
+.B \-s<path>, \-\-source=<path>
+Source file path
+.Pp
+.Pp
+.TP
+.B \-d<path>, \-\-destination=<path>
+Destination directory path
+.Pp
+.Pp
+.TP
+.B \-c<string>, \-\-cookie=<string>
+Cookie
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Shares user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Shares username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-\-target-rate=<rate>
+Attempt to revise the target rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-min-rate=<rate>
+Attempt to revise the minimum rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-rate-policy=<fair|low|high|fixed>
+Attempt to revise the rate policy (if server settings allow) to "fixed", "high", "fair" or "low".
+.Pp
+.Pp
+.TP
+.B \-\-cipher=<aes128|aes192|aes256|none>
+Attempt to set the encryption cypher to "aes-128", "aes-192", "aes-256" or "none" (if server settings allow).
+.Pp
+.RE
+
+.SH SHARES DOWNLOAD COMMAND
+
+.B Usage:
+.RS
+  \fBaspera shares\fR download [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Shares host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Shares listening port 
+.Pp
+.Pp
+.TP
+.B \-s<path>, \-\-source=<path>
+Source file path
+.Pp
+.Pp
+.TP
+.B \-d<path>, \-\-destination=<path>
+Destination directory path
+.Pp
+.Pp
+.TP
+.B \-c<string>, \-\-cookie=<string>
+Cookie
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Shares user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Shares username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-\-target-rate=<rate>
+Attempt to revise the target rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-min-rate=<rate>
+Attempt to revise the minimum rate (if server settings allow) to a new throughput value in kbps.
+.Pp
+.Pp
+.TP
+.B \-\-rate-policy=<fair|low|high|fixed>
+Attempt to revise the rate policy (if server settings allow) to "fixed", "high", "fair" or "low".
+.Pp
+.Pp
+.TP
+.B \-\-cipher=<aes128|aes192|aes256|none>
+Attempt to set the encryption cypher to "aes-128", "aes-192", "aes-256" or "none" (if server settings allow).
+.Pp
+.RE
+.SH SHARES BROWSE COMMAND
+
+.B Usage:
+.RS
+  \fBaspera shares\fR browse [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-c<num>, \-\-count=<num>
+Only get up to <num> items
+.Pp
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-j, \-\-json
+Output raw JSON
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Shares host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Shares listening port 
+.Pp
+.Pp
+.TP
+.B \-P<path>, \-\-path=<path>
+Shares remote path (defaults to "/")
+.Pp
+.Pp
+.TP
+.B \-k<num>, \-\-skip=<num>
+Skip the first <num> items
+.Pp
+.Pp
+.TP
+.B \-o<order>, \-\-sort=<order>
+Sort by <type|size_a|size_d|mtime_a|mtime_d>
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Shares user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Shares username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.RE
+
+.SH SHARES DELETE COMMAND
+
+.B Usage:
+.RS
+  \fBaspera shares\fR delete [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-j, \-\-json
+Output raw JSON
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Shares host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Shares listening port 
+.Pp
+.Pp
+.TP
+.B \-P<path>, \-\-path=<path>
+Remote files/directory path to be deleted
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Shares user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Shares username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.RE
+
+.SH SHARES RENAME COMMAND
+
+.B Usage:
+.RS
+  \fBaspera shares\fR rename [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.TP
+.B \-i, \-\-insecure
+Accept the certificate even if it is invalid
+.Pp
+.Pp
+.TP
+.B \-j, \-\-json
+Output raw JSON
+.Pp
+.Pp
+.TP
+.B \-H<host>, \-\-host=<host>
+Shares host name
+.Pp
+.Pp
+.TP
+.B \-T<port>, \-\-port=<port>
+Shares listening port 
+.Pp
+.Pp
+.TP
+.B \-P<path>, \-\-path=<path>
+Remote directory containing the file to be renamed (defaults to "/")
+.Pp
+.Pp
+.TP
+.B \-s<path>, \-\-source=<path>
+Remote file/directory that is to be renamed
+.Pp
+.Pp
+.TP
+.B \-d<path>, \-\-destination=<path>
+New name for the file/directory
+.Pp
+.Pp
+.TP
+.B \-p<pass>, \-\-password=<pass>
+Shares user password (can also be set more securely with ASPERA_PASS environment variable prior to invocation). Omitting this password option will lead to a prompt for non-echoing password to be entered in CLI.
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Shares username
+.Pp
+.Pp
+.TP
+.B \-b<path>, \-\-base-ca-path=<path>
+Base path for CA certificates (optional)
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.RE
+
+.SH FILES SEND COMMAND
+
+.B Usage:
+.RS
+  \fBaspera files\fR send [<args>]
+.RE
+
+.B Arguments:
+.RS
+.Pp
+.Pp
+.TP
+.B \-f<path>, \-\-file=<path>
+File(s) to be sent in package
+.Pp
+.Pp
+.TP
+.B \-n<body>, \-\-name=<body>
+Name for the Files package
+.Pp
+.Pp
+.TP
+.B \-m<body>, \-\-message=<body>
+A message (body) for the Files package
+.Pp
+.Pp
+.TP
+.B \-r<email>, \-\-recipient=<email>
+Recipient(s) of the package (may be specified multiple times for multiple recipients). A valid e-mail address can be specified as the recipient.
+.Pp
+.Pp
+.TP
+.B \-o<id>, \-\-organization=<id>
+The name of the organization registered with Files
+.Pp
+.Pp
+.TP
+.B \-u<name>, \-\-user=<name>
+Files username
+.Pp
+.Pp
+.TP
+.B \-v, \-\-verbose
+Show more verbose output for debugging
+.Pp
+.Pp
+.TP
+.B \-w, \-\-workspace
+Files workspace to send package to. Both sender and reciever have to be members of the workspace
+.Pp
+.Pp
+.TP
+.B \-q, \-\-filelist
+File containing a list of files to transfer
+.Pp
+.Pp
+.TP
+.B \-lw, \-\-lsworkspace
+Get the list of Files workspaces
+
+
+.SH FASPEX EXAMPLES
+The following command line will list the contents of a remote source (22 in this example). The results can then be used to send packages with contents from that remote source.
+
+.RS
+ \fBaspera\fR faspex browse \-\-source=22 \-p /Datasheets
+.RE
+
+The following command line would send a Faspex package containing a file called "test_file" in the current directory to the user "user" on the server faspex.com.  It would do so by contacting the faspex server at https://faspex.com and logging in with the user "myuser" and prompt for a password entry.  When the recipient receives the e\-mail, "File 4 U" will appear in the subject line identifying this package.
+
+.RS
+ \fBaspera\fR faspex send \-ftest_file \-n"This is a note for a Faspex package sent with the command line client" \-t"File 4 U" \-r"user" -H"faspex.com" \-umyuser
+.RE
+
+The following command line would send a Faspex package containing a file called "test_file" from a remote source. It would do so by contacting the Faspex server at https://faspex.com and logging in with the user "myuser" and the password "mypassword" (Note - best to not include the -p argument to get a prompt for password entry). When the recipient receives the e\-mail, "File 4 U" will appear in the subject line identifying this package.
+
+.RS
+ \fBaspera\fR faspex send \-ftest_file \-\-source-id=22 \-n"This is a note for a Faspex package sent with the command line client" \-t"File 4 U" \-r"user" -H"faspex.com" \-umyuser \-pmypassword
+.RE
+
+The following command line will download the specified package based on the "faspe://" URL returned from the faspex "list" command.
+
+.RS
+ \fBaspera\fR faspex get \-umyuser \-pmypassword \-\-url "faspe://..."
+.RE
+
+The following command line will list packages in a user's inbox in human-readable format.
+
+.RS
+ \fBaspera\fR faspex list \-umyuser \-pmypassword \-n
+.RE
+
+The following command line will list packages in a user's inbox in XML (RSS) format. (Note that the faspe://... URLs in this format contain XML escape sequences, like &amp; for example, and cannot be used-as-is and pasted as input to a "get" command, unless first removed "manually" or by an XML parser.)
+
+.RS
+ \fBaspera\fR faspex list \-umyuser \-pmypassword \-n \-x
+.RE
+
+.SH SHARES EXAMPLES
+
+The following will upload local_file to the destination dir using the user with username and host xxx.xx.xx.xx.  (Assuming password is set via environment variable, not provided on the command line).
+
+.RS
+ \fBaspera\fR shares upload \-i \-\-host=xxx.xx.xx.xx \-umyuser \-\-source=local_file \-\-destination=/upload_share/incoming
+.RE
+
+The following will download Bytestream-Sender-Receiver.mov to the local destination local_dir using the user with username and host xxx.xx.xx.xx.
+
+.RS
+ \fBaspera\fR shares download \-i \-\-host=xxx.xx.xx.xx \-umyuser \-\-source=/download_share/outgoing/Bytestream-Sender-Receiver.mov \-\-destination=local_dir
+.RE
+
+The following will browse the root '/' of the server xxx.xx.xx.xx using the user username to authenticate returning the list of shares.
+
+.RS
+ \fBaspera\fR shares browse \-i \-\-host=xxx.xx.xx.xx \-umyuser \-\-path=/
+.RE
+
+The following will rename the file Bytestream-Sender-Receiver.mov to Newfile.mov on the host xxx.xx.xx.xx using the user username to authenticate.
+
+.RS
+ \fBaspera\fR shares rename \-i \-\-host=xxx.xx.xx.xx \-umyuser \-\-source=/MovWorkFlowShare/Bytestream-Sender-Receiver.mov \-\- destination=/MovWorkFlowShare/Newfile.mov
+.RE
+
+The following will delete the file '/test/file' on the host xxx.xx.xx.xx using the user myuser to authenticate.
+
+.RS
+ \fBaspera\fR shares delete \-i \-\-host=xxx.xx.xx.xx \-umyuser \-\-path=/test/file
+.RE
+
+.SH FILES EXAMPLES
+
+The following command line sends a Files package containing a file called "test_file" from a remote source. When the recipient receives the e\-mail, "Package_name" appears in the subject line identifying this package.
+
+.RS
+ \fBaspera\fR files send \-f test_file \-o testorg \-n "Package_name" \-r "user@example.com" \-u myuser@example.com \-w workspace_name \-m "This is the body of an email"
+.RE
+
+The following command line will list the workspaces.
+
+.RS
+ \fBaspera\fR files send \-lw
+.RE
+
+.SH AUTHOR
+Copyright Aspera, Inc. An IBM Company.  All rights reserved.  http://asperasoft.com

@@ -1,0 +1,6 @@
+<product>
+  <name>Aspera CLI</name>
+  <version>3.7.6.636.4d51a47</version>
+  <components>
+  </components>
+</product>

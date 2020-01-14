@@ -1,0 +1,83 @@
+{
+    "name": "DicomUploader",
+    "productName": "DicomUploader",
+    "version": "0.1.9",
+    "description": "Upload DICOM files to an XNAT using Aspera",
+    "author": "Michael Hileman <mhileman@wustl.edu>",
+    "repository": "bitbucket:mhileman/ccf-dicom-upload",
+    "homepage": "https://bitbucket.org/mhileman/ccf-dicom-uploader/src/master/README.md",
+    "license": "MIT",
+    "main": "src/main.js",
+    "scripts": {
+        "server": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --quiet --port 3000 --content-base ./src",
+        "dev": "cross-env NODE_ENV=development electron ./src/main.js",
+        "build": "cross-env NODE_ENV=production webpack --progress --profile --colors",
+        "start": "electron start",
+        "package": "npm run build && electron-builder -mwl && npm run package-rename",
+        "package-rename": "build/package-rename.sh"
+    },
+    "dependencies": {
+        "@paulcbetts/mime-types": "^2.1.10",
+        "about-window": "^1.11.0",
+        "axios": "^0.17.0",
+        "cryptr": "^2.0.0",
+        "electron-compile": "^6.4.2",
+        "electron-settings": "^3.1.4",
+        "fs-walk": "0.0.1",
+        "install": "^0.10.4",
+        "lru-cache": "^4.1.1",
+        "macos-alias": "^0.2.11",
+        "make": "^0.8.1",
+        "node-datetime": "^2.0.3",
+        "npm": "^6.0.0",
+        "pify": "^3.0.0",
+        "pseudomap": "^1.0.2",
+        "rxjs": "^5.5.2",
+        "ssh-keygen": "^0.4.1",
+        "vue": "^2.3.4",
+        "vue-router": "^3.0.1",
+        "yallist": "^3.0.2"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-transform-async-to-generator": "^6.24.1",
+        "babel-preset-env": "^1.6.1",
+        "babel-preset-react": "^6.24.1",
+        "bcrypt": "^1.0.2",
+        "cross-env": "^5.0.1",
+        "css-loader": "^0.28.4",
+        "electron-builder": "^19.55.3",
+        "electron-forge": "^4.1.6",
+        "electron-prebuilt-compile": "^1.7.9",
+        "electron-reload": "^1.2.1",
+        "electron-toolkit": "^1.0.24",
+        "file-loader": "^0.11.2",
+        "vue-devtools": "^3.1.9",
+        "vue-loader": "^13.3.0",
+        "vue-template-compiler": "^2.5.2",
+        "webpack": "^3.8.1",
+        "webpack-dev-server": "^2.9.4"
+    },
+    "build": {
+        "appId": "org.nrg.ccf.DicomUploader",
+        "asarUnpack": "node_modules/ssh-keygen",
+        "extraResources": "bin",
+        "copyright": "Copyright © 2018",
+        "productName": "DicomUploader",
+        "electronVersion": "1.7.9",
+        "asar": true,
+        "directories": {
+            "output": "out"
+        },
+        "linux": {
+            "target": "AppImage",
+            "icon": "build/png/512x512.png",
+            "category": "Utility"
+        },
+        "win": {
+            "target": "NSIS",
+            "icon": "build/icon.ico"
+        }
+    }
+}

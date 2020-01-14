@@ -1,0 +1,47 @@
+{
+  "Faspex": {
+      "faspex_servers" : [
+        {
+           "name": "Aspera Demo",
+           "sources" : [
+             {
+               "uid" : "1",
+               "name" : "demo",
+               "scheme" : "https",
+               "host" : "demo.asperasoft.com",
+               "port" : 9092,
+               "username" : "asperaweb",
+               "password" : "demoaspera",
+               "base_dir" : "/"
+             }
+           ]
+        },
+        { 
+           "name": "Faspex.com",
+           "sources" : [
+             {
+               "uid" : "22",
+               "name" : "marketing",
+               "scheme" : "https",
+               "host" : "marketing.asperasoft.com",
+               "port" : 9092,
+               "username" : "asp1",
+               "password" : "aspera",
+               "base_dir" : "/IBM Branded Collateral"
+             }
+           ]
+        }
+      ]
+  },
+  "AsperaFiles": {
+     "client_id": "your_client_id",
+     "client_secret": "your_client_secret",
+     "private_key_file_name": "files_private_key.pem",
+     "files_organizations": [
+        {
+        "name": "Organization Name",
+        "host": "<organization_subdomain>.asperafiles.com"
+        }
+     ]
+  }
+}
