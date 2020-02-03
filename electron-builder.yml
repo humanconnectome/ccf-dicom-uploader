@@ -1,0 +1,22 @@
+"appId": "org.nrg.ccf.DicomUploader"
+"asarUnpack": "node_modules/ssh-keygen"
+"extraResources": "bin"
+"copyright": "Copyright © 2020"
+"productName": "DicomUploader"
+"electronVersion": "6.0.0"
+"asar": true
+"directories": {
+  "output": "out"
+}
+"linux": {
+  "target": "AppImage",
+  "icon": "build/png/512x512.png",
+  "category": "Utility"
+}
+"win": {
+  "target": "NSIS",
+  "icon": "build/icon.ico"
+}
+mac:
+  category: public.app-category.medical
+  target: dmg

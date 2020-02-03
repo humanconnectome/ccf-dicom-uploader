@@ -1,0 +1,39 @@
+html, body {
+  height: 100%;
+  /*margin: 0;*/
+
+  /* Disable text selection */
+  /*-webkit-user-select: none;*/
+  -webkit-app-region: drag;
+
+  /* Make sure this matches the native window background color that you pass to
+   * electron.BrowserWindow({...}), otherwise your app startup will look bad. */
+  background: rgb(255, 255, 255);
+
+  animation: fadein 1s;
+}
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.header, .footer {
+  background: #f8f8f8;
+}
+.content {
+  flex: 1;
+  overflow: auto;
+}
+/*
+.uk-legend, .uk-modal-title {
+  font-size: 1.3em;
+}*/
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
