@@ -140,7 +140,6 @@
 const app = require("electron").remote.app;
 const settings = require("electron-settings");
 
-
 export default {
   data() {
     return {

@@ -376,7 +376,7 @@ export default {
       var xferClient = settings.get("config.xferClient");
 
       var keyPath = path.join(
-        path.dirname(settings._defaultSettingsFilePath),
+        path.dirname(settings._getSettingsFilePath()),
         "ccf_id_rsa"
       );
 

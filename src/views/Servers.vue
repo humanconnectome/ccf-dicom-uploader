@@ -684,7 +684,7 @@ export default {
     generateKeypair: function() {
       this.keypair.generated = true;
       this.keypair.path = path.join(
-        path.dirname(settings._defaultSettingsFilePath),
+        path.dirname(settings._getSettingsFilePath()),
         "ccf_id_rsa"
       );
       console.log("Generating key pair at " + this.keypair.path);
