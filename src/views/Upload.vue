@@ -251,7 +251,7 @@ export default {
       console.log("Checking directory for DICOM files");
       var _this = this;
 
-      return new Promise((resolve, reject) => {
+      return new Promise(function(resolve, reject) {
         walk.files(
           _this.uploadDirectory,
           (basedir, filename, stat, next) => {
@@ -267,7 +267,7 @@ export default {
               next();
             }
             if (tag) {
-              // console.log('Found DICOM tag x00100010')
+              //console.log("Found DICOM tag x00100010");
               resolve(true);
             }
           },

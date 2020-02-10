@@ -18,7 +18,7 @@
     "core-js": "^3.4.4",
     "cryptr": "^2.0.0",
     "electron-settings": "^3.2.0",
-    "fs-walk": "^0.0.2",
+    "fs-walk": "https://github.com/humanconnectome/fs-walk",
     "node-datetime": "^2.1.2",
     "ssh-keygen": "^0.4.2",
     "vue": "^2.6.10",
