@@ -1,8 +1,17 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu, protocol } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import axios from "axios";
+
+const Cryptr = require("cryptr");
+
+import https from "https";
+
+import path from "path";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
+const openAboutWindow = require("about-window").default;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -36,6 +45,8 @@ function createWindow() {
   win.on("closed", () => {
     win = null;
   });
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 }
 
 // Quit when all windows are closed.
@@ -89,3 +100,142 @@ if (isDevelopment) {
     });
   }
 }
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
+
+app.adminEmail = "issues@humanconnectome.org";
+const cryptr = new Cryptr("de15217f86f7453a51dff661518ce99d");
+
+// TODO use Vuex and put this in store
+app.httpGet = function(hostname, uri, auth) {
+  console.log("Requesting " + auth.username + " @ " + hostname + uri);
+
+  const http = axios.create({
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false,
+      requestCert: true,
+      agent: false,
+      strictSSL: false
+    }),
+    baseURL: hostname,
+    withCredentials: true,
+    auth: auth
+  });
+
+  return http.get(uri);
+};
+
+// TODO use Vuex and put this in store
+app.httpPost = function(hostname, uri, auth) {
+  console.log("POST " + hostname + uri);
+
+  const http = axios.create({
+    httpsAgent: new https.Agent({
+      rejectUnauthorized: false,
+      requestCert: true,
+      agent: false,
+      strictSSL: false
+    }),
+    baseURL: hostname,
+    withCredentials: true,
+    auth: auth,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+
+  const response = http.post(uri);
+  return response;
+};
+
+app.encrypt = function(str) {
+  return cryptr.encrypt(str);
+};
+
+app.decrypt = function(str) {
+  return cryptr.decrypt(str);
+};
+
+// Application main menu
+const aboutIcon = path.join(__dirname, "assets/icon/png/128x128.png");
+console.log(aboutIcon);
+
+var menuTemplate = [
+  {
+    label: "DICOM Uploader",
+    submenu: [
+      {
+        label: "About Application",
+        // selector: "orderFrontStandardAboutPanel:"
+        click: () => openAboutWindow(aboutIcon)
+      },
+      {
+        label: "Hide",
+        accelerator: "Command+H",
+        selector: "hide:"
+      },
+      {
+        type: "separator"
+      },
+      {
+        label: "Quit",
+        accelerator: "Command+Q",
+        click: function() {
+          app.quit();
+        }
+      }
+    ]
+  },
+  {
+    label: "Edit",
+    submenu: [
+      {
+        label: "Copy",
+        accelerator: "CmdOrCtrl+C",
+        role: "copy"
+      },
+      {
+        label: "Paste",
+        accelerator: "CmdOrCtrl+V",
+        role: "paste"
+      },
+      {
+        label: "Select All",
+        accelerator: "CmdOrCtrl+A",
+        role: "selectall"
+      }
+    ]
+  },
+  {
+    label: "View",
+    submenu: [
+      {
+        label: "Console",
+        accelerator: "CmdOrCtrl+I",
+        click: function() {
+          win.webContents.openDevTools(["undocked"]);
+        }
+        // role: "toggledevtools"
+      },
+      {
+        label: "Reload",
+        accelerator: "CmdOrCtrl+R",
+        role: "reload"
+      }
+    ]
+  },
+  {
+    role: "help",
+    submenu: [
+      {
+        label: "Learn More",
+        click: function() {
+          require("electron").shell.openExternal(
+            "https://humanconnectome.org/"
+          );
+        }
+      }
+    ]
+  }
+];
