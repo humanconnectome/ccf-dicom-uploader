@@ -20,7 +20,7 @@
     "electron-settings": "^3.2.0",
     "fs-walk": "https://github.com/humanconnectome/fs-walk",
     "node-datetime": "^2.1.2",
-    "ssh-keygen": "^0.4.2",
+    "ssh-keygen": "https://github.com/humanconnectome/ssh-keygen",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
   },
