@@ -381,11 +381,14 @@ export default {
       );
 
       // TODO clean up production vs development
-      var binDir = path.join(__dirname, "..", "..", "bin");
+      var binDir
       if (process.env.NODE_ENV === "development") {
         binDir = path.join(process.cwd(), "bin");
         console.log("Setting binDir in DEV env");
+      } else {
+        binDir = path.join(__dirname, "..", "bin");
       }
+        console.log("Setting binDir to:", binDir)
 
       // Set up options depending on upload client and platform
       // Only host and key should vary between client and platforms
@@ -474,6 +477,7 @@ export default {
       return new Promise((resolve, reject) => {
         try {
           var client = child_process.spawn(script, options, params);
+            console.log('RUNNING::', script, options, params)
 
           // client.stdout.on('data', (data) => {
           //   output.innerHTML += data
