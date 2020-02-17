@@ -3,12 +3,9 @@
 Custom uploader for the Connectome Coordination Facility at Washington U St. Louis. Built with Electon and uses IBM's high speed Aspera transfer client.
 
 ## Installation
+Precompiled binaries are available for Linux (.AppImage), Windows(.exe), and MacOS (.dmg) in the project [releases](https://github.com/humanconnectome/ccf-dicom-uploader/releases)
 
-- Macintosh: [Download from Box](https://wustl.box.com/s/a7qagr0bh9l43cyey0h36qom18zlvwpe)
-- Windows: [Download from Box](https://wustl.box.com/s/plac2hlzedwmcak9o6fuagtf05y1a9lz)
-- Linux: [Download from Box](https://wustl.box.com/s/w8mruox0mge2f3jfgg3d6r2ghcqnug43)
-
-Note: I had to install libgconf-2-4 on Ubuntu 17 in order to run.
+Note: Ubuntu might require libgconf-2-4 in order to run.
 ```sh
 $ sudo apt-get install libgconf-2-4
 # Then to run the AppImage
@@ -28,13 +25,6 @@ $ ./DicomUploader-x86_64.AppImage
 3. You can define the subject and session labels or extract them from the DICOM headers. Note, a multi-sesson upload can only extract from headers.
 
 
-## Install for Development
-```sh
-$ git clone ...
-$ cd ccf-dicom-uploader
-$ npm install
-```
-
 ## Server Setup (Backend)
 
 The XNAT and Aspera servers must have a cross-mounted directory in common.
@@ -42,7 +32,7 @@ For Rsync transfers, you can set the transfer user up directly on the XNAT serve
 
 
 
-
+# Development
 ## Project setup
 ```
 yarn install
@@ -50,18 +40,15 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn run electron:serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn build
+yarn run electron:build
 ```
 
 ### Lints and fixes files
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
