@@ -261,14 +261,10 @@ export default {
 
             try {
               var dataSet = dicomParser.parseDicom(byteArray);
-              var tag = dataSet.string("x00100010");
+              resolve(true);
             } catch (e) {
               console.log(e);
               next();
-            }
-            if (tag) {
-              //console.log("Found DICOM tag x00100010");
-              resolve(true);
             }
           },
           err => {
