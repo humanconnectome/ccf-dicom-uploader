@@ -39,6 +39,9 @@ const walk = require("fs-walk");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
+// const archiver = require('archiver');
+const admZip = require("adm-zip");
+const temp = require("temp").track();
 
 const settings = require("electron-settings");
 
@@ -54,6 +57,44 @@ document.addEventListener("dragover", function(e) {
   e.stopPropagation();
 });
 
+
+/**
+ * @param {String} source
+ * @param {String} out
+ * @returns {Promise}
+ */
+function zipDirectory_old(source) {
+  const archive = archiver('zip', { zlib: { level: 9 }});
+  const temp_path = temp.mkdirSync("dicom-uploader");
+  const out = path.join(temp_path, path.basename(source) + ".zip");
+  const stream = fs.createWriteStream(out);
+  console.log("Zipping:", source);
+  console.log("Saving zip to: ", out);
+
+  return new Promise((resolve, reject) => {
+    archive
+        .directory(source, false)
+        .on('error', err => reject(err))
+        .pipe(stream)
+    ;
+
+    stream.on('close', () => {
+      console.log("Saved zip to: ", out);
+      return resolve(out)
+    } );
+    archive.finalize();
+  });
+}
+function zipDirectory(source) {
+  const temp_path = temp.mkdirSync("dicom-uploader");
+  const out = path.join(temp_path, path.basename(source) + ".zip");
+  const file = new admZip();
+  file.addLocalFolder(source);
+  console.log("Zipping:", source);
+  file.writeZip(out);
+  console.log("Finished zip to: ", out);
+  return out
+}
 export default {
   data() {
     return {
@@ -416,7 +457,7 @@ export default {
           host,
           this.project,
           this.imageSessions[i].sessionLabel,
-          this.imageSessions[i].directory,
+          await zipDirectory(this.imageSessions[i].directory),
           this.inboxPath,
           key,
           localLog,
