@@ -453,11 +453,18 @@ export default {
           }
         }
 
+        let upload_path = this.imageSessions[i].directory;
+        //TODO: check if zip has been checked
+        if (true){
+          upload_path = await zipDirectory_old(upload_path);
+          this.imageSessions[i].directory = upload_path;
+        }
+
         var options = [
           host,
           this.project,
           this.imageSessions[i].sessionLabel,
-          await zipDirectory_old(this.imageSessions[i].directory),
+          upload_path,
           this.inboxPath,
           key,
           localLog,
@@ -604,10 +611,7 @@ export default {
       };
       // var inboxPath = servers[i].inbox
       console.log("imageSession.directory: " + imageSession.directory);
-      // var directories = imageSession.directory.split('/')
-      // var lastDirectory = directories[directories.length-1]
-      // var lastDirectory = path.basename(path.dirname(imageSession.directory))
-      var lastDirectory = imageSession.directory.split(path.sep).pop();
+      var lastDirectory = path.basename(imageSession.directory);
       console.log("topDirectory: " + lastDirectory);
 
       var options = settings.get("options");
