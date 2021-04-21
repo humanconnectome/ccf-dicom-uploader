@@ -454,8 +454,7 @@ export default {
         }
 
         let upload_path = this.imageSessions[i].directory;
-        //TODO: check if zip has been checked
-        if (true){
+        if (settings.get("options.zipMode") == "zip") {
           upload_path = await zipDirectory_old(upload_path);
           this.imageSessions[i].directory = upload_path;
         }

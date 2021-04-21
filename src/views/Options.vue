@@ -133,6 +133,45 @@
         </div>
       </div>
     </div>
+
+    <hr />
+
+
+    <div class="uk-grid">
+      <div class="uk-width-1-2 uk-text-right">
+        <h4>
+          Zip File
+          <a
+              uk-tooltip="pos:right"
+              title="Aspera, the technology used by this program, works best with large files. Depending on how your DICOM files are generated, you might experience faster speeds if zip everything into a single large file first."
+          >
+            <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+          </a>
+        </h4>
+      </div>
+
+      <div class="uk-width-1-2">
+        <label class="radio">
+          <input
+              type="radio"
+              name="zipMode"
+              value="zip"
+              v-model="zipMode"
+          />
+          Single Zip-File
+        </label>
+        <label class="radio">
+          <input
+              type="radio"
+              name="zipMode"
+              value="raw"
+              v-model="zipMode"
+          />
+          Raw DICOM files
+        </label>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -148,6 +187,7 @@ export default {
       loadingProjects: false,
       projectDropdownText: "",
       uploadType: "single", // or 'mulitple'
+      zipMode: "zip", // or 'raw'
       labelsFrom: "user", // or 'dicom'
       subjectLabel: "",
       sessionLabel: ""
