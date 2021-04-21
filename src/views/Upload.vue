@@ -64,7 +64,7 @@ document.addEventListener("dragover", function(e) {
  * @returns {Promise}
  */
 function zipDirectory_old(source) {
-  const archive = archiver('zip', { zlib: { level: 9 }});
+  const archive = archiver('zip', { zlib: { level: 0 }});
   const temp_path = temp.mkdirSync("dicom-uploader");
   const out = path.join(temp_path, path.basename(source) + ".zip");
   const stream = fs.createWriteStream(out);
