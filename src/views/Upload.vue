@@ -39,7 +39,7 @@ const walk = require("fs-walk");
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
-// const archiver = require('archiver');
+const archiver = require('archiver');
 const admZip = require("adm-zip");
 const temp = require("temp").track();
 
@@ -293,7 +293,7 @@ export default {
       var _this = this;
 
       return new Promise(function(resolve, reject) {
-        walk.files(
+        walk.filesSync(
           _this.uploadDirectory,
           (basedir, filename, stat, next) => {
             var filepath = path.join(basedir, filename);
@@ -457,7 +457,7 @@ export default {
           host,
           this.project,
           this.imageSessions[i].sessionLabel,
-          await zipDirectory(this.imageSessions[i].directory),
+          await zipDirectory_old(this.imageSessions[i].directory),
           this.inboxPath,
           key,
           localLog,
